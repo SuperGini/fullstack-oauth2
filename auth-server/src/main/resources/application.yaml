@@ -45,3 +45,8 @@ spring:
           fail_on_pagination_over_collection_fetch: true
           plan_cache_max_size: 4096
         dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    org.hibernate.sql: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
