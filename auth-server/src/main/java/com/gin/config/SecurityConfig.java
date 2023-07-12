@@ -1,5 +1,6 @@
 package com.gin.config;
 
+
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -9,9 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -26,6 +27,8 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -37,35 +40,33 @@ import java.util.UUID;
 
 /**
  * https://docs.spring.io/spring-authorization-server/docs/current/reference/html/getting-started.html
- * */
+ */
 
 @Configuration
 public class SecurityConfig {
 
-
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http); // for the moment we need this. In the future we might not
-
+        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+                .oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
         http
-                .getConfigurer(OAuth2AuthorizationServerConfigurer.class) // -> to get access to http://localhost:8080/.well-known/openid-configuration from postman
-                .oidc(Customizer.withDefaults()); // -> OpenId connect
+                // Redirect to the login page when not authenticated from the
+                // authorization endpoint
+                .exceptionHandling((exceptions) -> exceptions
+                        .defaultAuthenticationEntryPointFor(
+                                new LoginUrlAuthenticationEntryPoint("/login"),
+                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
+                        )
+                )
+                // Accept access tokens for User Info and/or Client Registration
+                .oauth2ResourceServer((resourceServer) -> resourceServer
+                        .jwt(Customizer.withDefaults()));
 
-        http.formLogin(Customizer.withDefaults());
-
-        return http
-                .build();
+        return http.build();
     }
 
-    @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        return http
-             //   .csrf(AbstractHttpConfigurer::disable) // dont forget to enable // -> Thymeleaf takes care of CSRF :)
-                .authorizeHttpRequests(request -> request.anyRequest().permitAll())
-                .formLogin(Customizer.withDefaults()) // -> add my login page
-                .build();
-    }
 
     //FOR THE MOMENT
     @Bean
@@ -124,10 +125,9 @@ public class SecurityConfig {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
-
 
 
 }
