@@ -1,8 +1,6 @@
 package com.gin.config;
 
 
-//import com.gin.security.filter.LoginAuthenticationFilter;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +15,15 @@ public class WebConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(request -> request.anyRequest().permitAll())
-                .formLogin(x -> x.loginPage("/login").permitAll()) // -> add my login page
+                .authorizeHttpRequests(request ->
+                        request
+                                .requestMatchers("/error").permitAll()
+                                // -> need to grand access to css file or OAUTH2 does not work properly(at least for login page I think)
+                                .requestMatchers("/css/**").permitAll() // ->https://stackoverflow.com/questions/62531927/spring-security-redirect-to-static-resources-after-authentication
+                                .anyRequest().authenticated()
+                )
+                .formLogin(x ->
+                        x.loginPage("/login").defaultSuccessUrl("/home").permitAll())
                 .build();
     }
 
