@@ -82,7 +82,7 @@ public class SecurityConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) //nu este obligatoriu
-                .redirectUri("http://localhost:3000/authorized") //-> vaf ace redirect la acest url la front client
+                .redirectUri("http://localhost:3000/authorized") //-> va face redirect la acest url la front client
                 .tokenSettings(
                         //putem sa setam proprietatile tokenului
                         TokenSettings.builder()
