@@ -58,6 +58,7 @@ body {
     width: 100vw;
     height: 100vh;
     max-width: 100%;
+    max-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -285,4 +286,62 @@ span{
     height: 100%;
     object-fit: cover;
     padding: 1px 1px 1px 0;
+}
+
+/* ---------RESPONSIVE---------------------------------------------------------------------- */
+
+@media (max-width: 690px){
+    .left-container{
+        width: 60%;
+
+    }
+
+    .right-container {
+        width: 40%;
+
+    }
+}
+
+@media (max-width: 590px) {
+    .left-container {
+        width: 100%;
+
+    }
+
+    .right-container{
+        display: none;
+
+    }
+}
+
+@media (max-width: 320px){
+    .central-container{
+        padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 220px) {
+    .central-container{
+        width: 22rem;
+    }
+
+}
+
+@media (max-height: 580px){
+    footer {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-height: 550px){
+    footer {
+        display: none;
+    }
+
+}
+
+@media (max-height: 510px){
+    .central-container{
+        height: 510px;
+    }
 }
