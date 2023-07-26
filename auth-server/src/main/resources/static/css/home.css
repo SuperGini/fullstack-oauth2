@@ -1,0 +1,393 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --blue-color: #1c39df;
+    --dark-blue-color: #14289c;
+    --white-color: #fdfefe;
+    --gray-color: #ccd1d1;
+    --white-gray-color: #e0e3e3;
+    --orange-color: #ba4a00;
+    --red-color: #de2d1b;
+
+}
+
+/* How to fonts */
+/* https://stackoverflow.com/questions/4872592/use-multiple-font-face-rules-in-css */
+@font-face {
+    font-family: NatoSans-Font;
+    src: url("./fonts/NotoSans-Thin.ttf");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: NatoSans-Font;
+    src: url("./fonts/NotoSans-Regular.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: NatoSans-Font;
+    src: url("./fonts/NotoSans-Medium.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: NatoSans-Font;
+    src: url("./fonts/NotoSans-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: NatoSans-Font;
+    src: url("./fonts/NotoSans-Black.ttf");
+    font-weight: 900;
+}
+
+
+
+html {
+    font-size: 62.5%;
+}
+
+/* Very important for fixing overflow problem!!!!!!!!!!!! */
+/* https://stackoverflow.com/questions/23367345/100vw-causing-horizontal-overflow-but-only-if-more-than-one */
+body {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color:  var(--white-gray-color);
+    font-family: NatoSans-Font, sans-serif;
+
+}
+
+.central-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-width: 80rem;
+    max-height: 70rem;
+    background-color: var(--white-color);
+}
+
+.central-container .left-container h2 {
+
+}
+
+.left-container{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+.left-container .title {
+    font-size: 2rem;
+    margin-top: 4rem;
+    font-weight: 500;
+}
+
+.white-space{
+    max-height: 7rem;
+    min-height: 3rem;
+    height: 100%;
+}
+
+.form {
+    max-width: 30rem;
+    width: 100%;
+
+}
+
+.form-group {
+    position: relative;
+    margin-top: 2rem;
+    display: flex;
+}
+
+.form-group p {
+    color: var(--blue-color);
+}
+
+
+.form-control {
+    height: 5rem;
+    max-width: 30rem;
+    width: 100%;
+    border: 1.5px solid #ccd1d1;
+    border-radius: 1rem;
+    outline: none;
+    padding-left: 5rem;
+    padding-top: 1.5rem;
+}
+
+
+.form-control:focus{
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+}
+
+.form-group p {
+    position: absolute;
+    left: 5rem;
+    top: 0.5rem;
+}
+
+.alert {
+    font-size: 1.3rem;
+    color:  var(--orange-color);
+    text-align: center;
+    height: 1.4rem;
+}
+
+
+.icons-user {
+    position: absolute;
+    width: 4rem;
+    top: 50%;
+    left: 0;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid #ccd1d1;
+    transform: translate(0, -50%);
+    filter: invert(26%) sepia(81%) saturate(4624%) hue-rotate(31deg) brightness(99%) contrast(101%);
+}
+
+.icons-key {
+    position: absolute;
+    width: 4rem;
+    top: 50%;
+    left: 0;
+    padding: 0.5rem 1.2rem;
+    border-right: 1px solid #ccd1d1;
+    transform: translate(0, -50%);
+    filter: invert(26%) sepia(81%) saturate(4624%) hue-rotate(31deg) brightness(99%) contrast(101%);
+}
+
+.check-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 0.5rem;
+}
+
+.check-box label {
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+/* https://stackoverflow.com/questions/69958117/how-to-change-checkbox-background-color-in-simple-html */
+input[type="checkbox"] {
+    accent-color: var(--orange-color);
+}
+
+.btn {
+    max-width: 30rem;
+    width: 100%;
+    height: 4.5rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    border: transparent;
+    font-weight: 700;
+    background-color: var(--blue-color);
+    color: #fdfefe;
+    transition: 0.2s all ease-in;
+}
+
+
+.btn:hover{
+    background-color: var(--dark-blue-color);
+    cursor: pointer;
+}
+
+.white-space-2 {
+    max-height: 9rem;
+    height: 100%;
+    margin-top: 3rem;
+}
+
+footer {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-color);
+    margin-bottom: 3rem;
+}
+
+span{
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--orange-color);
+}
+
+/* --------------RIGHT CONTAINER------------------------- */
+
+.right-container {
+    width: 50%;
+    margin: 4rem 0;
+    border-left: 1px solid var(--gray-color);
+    display: flex;
+    flex-direction: column;
+}
+
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-height: 40rem;
+    height: 100%;
+    margin: 0 2rem;
+}
+
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    border: 1px solid var(--gray-color);
+    border-radius: 1rem;
+    transition: 0.2s all ease-in;
+}
+
+.user-item:hover  {
+    border: 1px solid var(--blue-color);
+}
+
+.right-container .user-container .user-item p {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-left: 1rem;
+}
+
+.right-container .user-container .user-item input {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-right: 1rem;
+    width: 6rem;
+    height: 2.5rem;
+    background-color: var(--red-color);
+    color: var(--white-color);
+    border: 1px solid var(--red-color);
+    border-radius: 0.5rem;
+    transition: 0.2s all ease-in;
+}
+
+.right-container .user-container .user-item input:hover {
+    cursor: pointer;
+    background-color: white;
+    color: #de2d1b;
+}
+
+.arrows-container{
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.arrows {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 3rem;
+    filter: invert(24%) sepia(92%) saturate(5636%) hue-rotate(234deg) brightness(87%) contrast(103%)
+}
+
+.arrows:hover {
+    cursor: pointer;
+
+
+}
+/* ---------RESPONSIVE---------------------------------------------------------------------- */
+
+/* ----WIDTH---- */
+
+@media (max-width: 690px){
+
+    .left-container{
+        width: 60%;
+
+    }
+
+    .right-container {
+        width: 40%;
+
+    }
+}
+
+@media (max-width: 590px) {
+    .central-container {
+        flex-direction: column;
+        max-height: 100vh;
+        align-items: center;
+
+    }
+
+    .right-container {
+        max-height: 70rem;
+        height: 100%;
+        width: 60%;
+        border-left: transparent;
+    }
+
+    footer{
+        display: none;
+
+    }
+}
+
+@media (max-width: 420px){
+    .central-container{
+        width: 100%;
+    }
+
+    .left-container{
+        width: 100%;
+    }
+
+    .right-container{
+        width: 100%;
+    }
+}
+
+@media (max-width: 240px) {
+    .central-container{
+        min-width: 24rem;
+    }
+}
+
+/* ---HEIGHT-- */
+
+@media (max-height: 970px) and (max-width: 590px){
+    .user-container{
+        min-height: 30rem;
+    }
+
+    .central-container {
+        min-height: 97rem;
+    }
+}
+
+@media (max-height: 580px){
+    footer {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-height: 550px){
+    footer {
+        display: none;
+    }
+
+    .central-container{
+        height: 55rem;
+    }
+
+}

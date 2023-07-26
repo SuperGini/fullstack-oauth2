@@ -5,9 +5,69 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
     <title>Document</title>
 </head>
 <body>
-    <p>XXXXXXXXXXXXXXXXXXXXXXX</p>
+<div class="central-container">
+    <div class="left-container">
+        <h2>User management</h2>
+        <form th:action="@{/create}" class="create-user-form" method="post">
+            <div class="form-group">
+                <img src="./svg/user.svg" alt="" class="icons-user">
+                <p>username</p>
+                <input type="text" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <img src="./svg/email.svg" alt="" class="icons-user">
+                <p>email</p>
+                <input type="email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <img src="./svg/lock.svg" alt="" class="icons-key">
+                <p>password</p>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <img src="./svg/phone.svg" alt="" class="icons-key">
+                <p>phone1</p>
+                <input type="text" name="phone1" class="form-control">
+            </div>
+            <div class="form-group">
+                <img src="./svg/phone.svg" alt="" class="icons-key">
+                <p>phone2</p>
+                <input type="text" name="phone2" class="form-control">
+            </div>
+            <div class="check-box">
+                <input type="checkbox" id="auth1" name="admin" value="ADMIN">
+                <label> ADMIN</label>
+                <input type="checkbox" id="auth2" name="user" value="USER">
+                <label>USER</label><br>
+            </div>
+            <input type="submit" class="btn" value="Create user">
+        </form>
+        <div class="white-space-2"></div>
+        <footer class="footer">
+            <p>code by SuperGini<span>&trade;</span> </p>
+        </footer>
+    </div>
+    <div class="right-container">
+        <form th:action="@{/user}" class="user-container" method="post">
+            <div class="user-item">
+                <p>username1</p>
+                <input type="submit" value="Delete" class="btn-delete">
+            </div>
+            <div class="user-item">
+                <p>username2</p>
+                <input type="submit" value="Delete" class="btn-delete">
+            </div>
+        </form>
+        <div class="arrows-container">
+            <img src="./svg/arrowleft.svg" alt="" class="arrows">
+            <img src="./svg/arrowright.svg" alt="" class="arrows">
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
