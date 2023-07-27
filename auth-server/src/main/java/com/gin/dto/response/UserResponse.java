@@ -1,16 +1,13 @@
-package com.gin.dto.request;
+package com.gin.dto.response;
 
 import com.gin.models.Authorities;
-import com.gin.models.Phone;
 
 import java.util.Set;
 
-public record UserRequest(
+public record UserResponse(
 
         String username,
         String email,
-        String password,
-        Phone phoneNumbers,
         Set<Authorities> authorities
 ) {
 }

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,8 +17,14 @@ public interface UserRepository extends HibernateRepository<User>, JpaRepository
 
 
     @Query("""
-            SELECT u FROM User u JOIN FETCH u.authorities
+            SELECT u FROM User u JOIN FETCH u.authorities WHERE u.username =:username
             """)
     Optional<User> findByUsername(String username);
+
+
+    @Query("""
+     SELECT u FROM User u JOIN FETCH u.authorities
+            """)
+    List<User> findAllUsers();
 
 }

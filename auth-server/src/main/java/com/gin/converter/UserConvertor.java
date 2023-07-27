@@ -1,6 +1,7 @@
 package com.gin.converter;
 
 import com.gin.dto.request.UserRequest;
+import com.gin.dto.response.UserResponse;
 import com.gin.models.User;
 import com.gin.models.security.SecurityUser;
 import lombok.experimental.UtilityClass;
@@ -19,8 +20,16 @@ public class UserConvertor {
         return new SecurityUser(user);
     }
 
-    public User convertFrom(SecurityUser securityUser){
+    public User convertFrom(SecurityUser securityUser) {
         return securityUser.getUser();
+    }
+
+    public UserResponse convertForm(User user) {
+        return new UserResponse(
+                user.getUsername(),
+                user.getEmail(),
+                user.getAuthorities()
+        );
     }
 
 }

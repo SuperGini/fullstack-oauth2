@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,56 +12,52 @@
 <div class="central-container">
     <div class="left-container">
         <h2>User management</h2>
-        <form th:action="@{/create}" class="create-user-form" method="post">
+        <form th:action="@{/user}"  method="post" th:object="${userRequest}" class="create-user-form">
             <div class="form-group">
                 <img src="./svg/user.svg" alt="" class="icons-user">
                 <p>username</p>
-                <input type="text" name="username" class="form-control">
+                <input type="text" th:field="*{username}" class="form-control">
             </div>
             <div class="form-group">
                 <img src="./svg/email.svg" alt="" class="icons-user">
                 <p>email</p>
-                <input type="email" name="email" class="form-control">
+                <input type="email" th:field="*{email}" class="form-control">
             </div>
             <div class="form-group">
                 <img src="./svg/lock.svg" alt="" class="icons-key">
                 <p>password</p>
-                <input type="password" name="password" class="form-control">
+                <input type="password" th:field="*{password}" class="form-control">
             </div>
             <div class="form-group">
                 <img src="./svg/phone.svg" alt="" class="icons-key">
                 <p>phone1</p>
-                <input type="text" name="phone1" class="form-control">
+                <input type="text" th:field="*{phoneNumbers.phoneNumber1}" class="form-control">
             </div>
             <div class="form-group">
                 <img src="./svg/phone.svg" alt="" class="icons-key">
                 <p>phone2</p>
-                <input type="text" name="phone2" class="form-control">
+                <input type="text" th:field="*{phoneNumbers.phoneNumber2}" class="form-control">
             </div>
             <div class="check-box">
-                <input type="checkbox" id="auth1" name="admin" value="ADMIN">
-                <label> ADMIN</label>
-                <input type="checkbox" id="auth2" name="user" value="USER">
-                <label>USER</label><br>
+                <div th:each="ath : ${auth}">
+                    <input  type="checkbox"  th:field="*{authorities}" th:value="${ath}">
+                    <label th:text="${ath}"></label>
+                </div>
             </div>
             <input type="submit" class="btn" value="Create user">
         </form>
         <div class="white-space-2"></div>
         <footer class="footer">
-            <p>code by SuperGini<span>&trade;</span> </p>
+            <p>code by SuperGini<span>&trade;</span></p>
         </footer>
     </div>
     <div class="right-container">
-        <form th:action="@{/user}" class="user-container" method="post">
-            <div class="user-item">
-                <p>username1</p>
+        <div class="user-container">
+            <div th:each="user: ${users}" class="user-item">
+                <p th:text="${user.username()}"></p>
                 <input type="submit" value="Delete" class="btn-delete">
             </div>
-            <div class="user-item">
-                <p>username2</p>
-                <input type="submit" value="Delete" class="btn-delete">
-            </div>
-        </form>
+        </div>
         <div class="arrows-container">
             <img src="./svg/arrowleft.svg" alt="" class="arrows">
             <img src="./svg/arrowright.svg" alt="" class="arrows">

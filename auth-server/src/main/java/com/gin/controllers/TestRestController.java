@@ -2,17 +2,16 @@ package com.gin.controllers;
 
 import com.gin.converter.UserConvertor;
 import com.gin.dto.request.UserRequest;
+import com.gin.dto.response.UserResponse;
+import com.gin.models.User;
+import com.gin.repositories.UserRepository;
 import com.gin.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,8 +19,7 @@ public class TestRestController {
 
     private final UserService userService;
 
-
-    @PostMapping("/user")
+    @PostMapping("/userx")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveUser(@RequestBody UserRequest userRequest) {
 
@@ -30,6 +28,13 @@ public class TestRestController {
         System.out.println(x);
 
         userService.createUser(UserConvertor.convertFrom(userRequest));
+    }
+
+
+    @GetMapping("/users")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponse> getAllUsers(){
+       return userService.getAllUsers();
     }
 
 
