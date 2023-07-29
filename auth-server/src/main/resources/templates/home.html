@@ -12,7 +12,7 @@
 <div class="central-container">
     <div class="left-container">
         <h2>User management</h2>
-        <form th:action="@{/user}"  method="post" th:object="${userRequest}" class="create-user-form">
+        <form th:action="@{/createUser}"  method="post" th:object="${userRequest}" class="create-user-form">
             <div class="form-group">
                 <img src="./svg/user.svg" alt="" class="icons-user">
                 <p>username</p>
@@ -53,10 +53,12 @@
     </div>
     <div class="right-container">
         <div class="user-container">
-            <div th:each="user: ${users}" class="user-item">
+<!--    https://stackoverflow.com/questions/24256051/delete-or-put-methods-in-thymeleaf        -->
+            <form th:each="user: ${users}" class="user-item" th:method="delete" th:action="@{/deleteUser(id=${user.id()})}">
                 <p th:text="${user.username()}"></p>
+<!--                <a th:href="@{/deleteUser(id=${user.id()})}">xxx</a>-->
                 <input type="submit" value="Delete" class="btn-delete">
-            </div>
+            </form>
         </div>
         <div class="arrows-container">
             <img src="./svg/arrowleft.svg" alt="" class="arrows">

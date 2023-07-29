@@ -24,7 +24,13 @@ spring:
         prepStmtCacheSize: 500
         prepStmtCacheSqlLimit: 1024
 
-## Hibernate properties
+# need this line so I can call delete method with thymeleaf from html page
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  ## Hibernate properties
   jpa:
     generate-ddl: true
     hibernate:
