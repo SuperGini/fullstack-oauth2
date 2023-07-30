@@ -35,7 +35,7 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
     open-in-view: false
     properties:
       hibernate:
@@ -54,7 +54,7 @@ spring:
 logging:
   level:
     org.hibernate.sql: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    org.springframework.security: TRACE
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#    org.springframework.security: TRACE
 #    root: trace
 

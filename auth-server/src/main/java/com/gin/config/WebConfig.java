@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -15,12 +16,12 @@ public class WebConfig {
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        // http.csrf(AbstractHttpConfigurer::disable);
+         http.csrf(AbstractHttpConfigurer::disable);
         return http
                 .authorizeHttpRequests(request ->
                         request
                                 .requestMatchers("/error").permitAll()
-                                .requestMatchers("/userx").permitAll()
+                                .requestMatchers("/user").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(x ->

@@ -15,10 +15,6 @@ import java.util.UUID;
 @Table(name = "autorities")
 public class Authorities {
 
-    public Authorities(String role) {
-        this.role = role;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")

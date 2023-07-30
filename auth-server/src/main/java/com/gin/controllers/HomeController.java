@@ -26,7 +26,7 @@ public class HomeController {
 
     @PostMapping("/createUser")
     public String createUser(@ModelAttribute("userRequest") UserRequest2 userRequest) {
-        userService.createUser(UserConvertor.convertFrom(userRequest));
+        userService.createUser(userRequest);
         return "redirect:home";
     }
 

@@ -8,40 +8,20 @@ import com.gin.models.User;
 import com.gin.models.security.SecurityUser;
 import lombok.experimental.UtilityClass;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @UtilityClass
 public class UserConvertor {
 
-    public SecurityUser convertFrom(UserRequest userRequest) {
-        User user = User.builder()
-                .username(userRequest.username())
-                .password(userRequest.password())
-                .authorities(userRequest.authorities())
-                .phoneNumbers(userRequest.phoneNumbers())
-                .email(userRequest.email())
-                .build();
-        return new SecurityUser(user);
-    }
-
-    public SecurityUser convertFrom(UserRequest2 userRequest) {
-        var auth = userRequest.getAuthorities().stream()
-                .map(Authorities::new)
-                .collect(Collectors.toSet());
-
-        User user = User.builder()
+    public User convertFrom(UserRequest2 userRequest, Set<Authorities> auth) {
+        return User.builder()
                 .username(userRequest.getUsername())
                 .password(userRequest.getPassword())
                 .authorities(auth)
                 .phoneNumbers(userRequest.getPhoneNumbers())
                 .email(userRequest.getEmail())
                 .build();
-        return new SecurityUser(user);
-    }
-
-
-    public User convertFrom(SecurityUser securityUser) {
-        return securityUser.getUser();
     }
 
     public UserResponse convertForm(User user) {

@@ -40,7 +40,7 @@ public class User {
     @Column(name = "phone_numbers")
     private Phone phoneNumbers;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     private Set<Authorities> authorities = new HashSet<>();
 
     @Override
