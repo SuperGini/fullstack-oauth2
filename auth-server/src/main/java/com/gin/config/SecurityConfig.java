@@ -75,10 +75,6 @@ public class SecurityConfig {
                 .clientId("client")
                 .clientSecret("secret")
                 .scope(OidcScopes.OPENID) //avem nevoie de cel putin un scop
-                /**
-                 * -> numerge cu asta -> de vazut de ce?? ->
-                 * trebuie in postman sa pun la Basic Auth username: client si password: secret la al doilea pas ca sa mearga
-                 */
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) //nu este obligatoriu
