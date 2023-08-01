@@ -28,7 +28,8 @@ public class Part {
     @Column(name = "price")
     private BigDecimal price;
 
-    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "part")
+    @JoinColumn(name = "car_id")
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Car car;
 
     @Override

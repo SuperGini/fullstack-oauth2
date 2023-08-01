@@ -15,7 +15,7 @@ public class PartService {
 
     private final PartRepository partRepository;
 
-    public void savePart(PartRequest partRequest){
+    public void savePart(PartRequest partRequest) {
         Part part = PartMapper.mapFrom(partRequest);
         partRepository.save(part);
 

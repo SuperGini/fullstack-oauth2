@@ -23,8 +23,7 @@ public class Car {
     @Column(name = "carModel")
     private String carModel;
 
-    @JoinColumn(name = "part_id")
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "car")
     private Part part;
 
     @Override

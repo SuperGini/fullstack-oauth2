@@ -33,8 +33,8 @@ spring:
 
 # https://github.com/spring-projects/spring-boot/issues/35338
 # so it doesn't generate the default password for basic authentication
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 
   ## Hibernate properties
   jpa:
@@ -60,3 +60,6 @@ spring:
 logging:
   level:
     org.hibernate.sql: DEBUG
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#    org.springframework.security: TRACE
+#    root: trace
