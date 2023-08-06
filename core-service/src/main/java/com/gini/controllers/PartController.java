@@ -1,6 +1,7 @@
 package com.gini.controllers;
 
 import com.gini.dto.request.PartRequest;
+import com.gini.dto.response.PartResponsePaginated;
 import com.gini.services.PartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,12 @@ public class PartController {
         partService.savePart(partRequest);
 
     }
+
+    @GetMapping("/parts/{page}/{pageSize}")
+    public PartResponsePaginated getPaginatedParts(@PathVariable int page, @PathVariable int pageSize){
+        return partService.getPartsWithPagination(page, pageSize);
+    }
+
+
 
 }

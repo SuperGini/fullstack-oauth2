@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -15,7 +13,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "parts", indexes = @Index( name = "partname_index",columnList = "partName"))
+@Table(name = "parts", indexes = @Index(name = "partname_index", columnList = "partName"))
 public class Part {
 
     @Id

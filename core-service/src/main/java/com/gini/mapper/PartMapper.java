@@ -1,6 +1,7 @@
 package com.gini.mapper;
 
 import com.gini.dto.request.PartRequest;
+import com.gini.dto.response.CarResponse;
 import com.gini.dto.response.PartResponse;
 import com.gini.model.Car;
 import com.gini.model.Part;
@@ -24,11 +25,17 @@ public class PartMapper {
     }
 
     public PartResponse mapForm(Part part) {
+        var car = new CarResponse(
+                part.getCar().getId(),
+                part.getCar().getManufacturer(),
+                part.getCar().getCarModel()
+        );
+
         return new PartResponse(
                 part.getId(),
                 part.getPartName(),
                 part.getPrice(),
-                part.getCar()
+                car
         );
     }
 
