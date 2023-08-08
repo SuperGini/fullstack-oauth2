@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-//@RequestMapping(
-//        consumes = APPLICATION_JSON_VALUE,
-//        produces = APPLICATION_JSON_VALUE)
+@RequestMapping(
+        consumes = APPLICATION_JSON_VALUE,
+        produces = APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class PartController {
 
@@ -34,7 +36,10 @@ public class PartController {
     }
 
     @GetMapping("/parts/{page}/{pageSize}")
-    public PartResponsePaginated getPaginatedParts(@PathVariable int page, @PathVariable int pageSize){
+    public PartResponsePaginated getPaginatedParts(@PathVariable int page, @PathVariable int pageSize, Principal principal){
+
+        var x = principal.getName();
+
         return partService.getPartsWithPagination(page, pageSize);
     }
 

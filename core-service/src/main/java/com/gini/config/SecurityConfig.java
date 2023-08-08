@@ -18,7 +18,7 @@ public class SecurityConfig {
         );
 
         http
-            .authorizeHttpRequests(req -> req.anyRequest().authenticated());
+           .authorizeHttpRequests(req -> req.anyRequest().authenticated());
 
         return http.build();
     }

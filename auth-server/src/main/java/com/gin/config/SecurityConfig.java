@@ -91,7 +91,15 @@ public class SecurityConfig {
                         .build())
                 .build();
 
-        return new InMemoryRegisteredClientRepository(r1);
+        RegisteredClient r2 = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("apiClient")
+                .clientSecret("apiSecret")
+                .scope(OidcScopes.OPENID)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .build();
+
+        return new InMemoryRegisteredClientRepository(r1, r2);
     }
 
     @Bean //daca avem JWT trebuie sa avem 2 chei -> astea ar trebui luate dintr-un vault

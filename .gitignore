@@ -1,3 +1,4 @@
 .idea
 auth-server/src/main/resources/application-local.yaml
 core-service/src/main/resources/application-local.yaml
+api-service/src/main/resources/application-local.yaml

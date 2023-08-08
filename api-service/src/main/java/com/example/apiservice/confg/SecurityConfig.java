@@ -25,10 +25,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http.oauth2Client(Customizer.withDefaults()); //client
-        http.authorizeHttpRequests(request -> {
-            request.anyRequest().permitAll();
-        });
-
+        http.authorizeHttpRequests(request -> request.anyRequest().permitAll());
         return http
                 .build();
     }
