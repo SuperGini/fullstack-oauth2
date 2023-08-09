@@ -1,0 +1,202 @@
+.central-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color:  var(--white-gray-color);
+}
+
+.inner-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 80rem;
+  max-height: 50rem;
+  background-color: var(--white-color);
+}
+
+.inner-container .title {
+  font-size: 2rem;
+  margin-top: 4rem;
+  font-weight: 500;
+}
+
+.white-space{
+  max-height: 7rem;
+  min-height: 3rem;
+  height: 100%;
+}
+
+.form {
+  max-width: 30rem;
+  width: 100%;
+}
+
+.form h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.form p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--blue-color);
+}
+
+.btn:hover{
+  background-color: var(--dark-blue-color);
+  box-shadow: rgba(176, 74, 0, 1) 0px 0px 0px 3px;
+  cursor: pointer;
+}
+
+.btn:focus{
+  background-color: var(--dark-blue-color);
+  box-shadow: rgba(176, 74, 0, 1) 0px 0px 0px 3px;
+  outline: none;
+}
+
+.btn {
+  max-width: 30rem;
+  width: 100%;
+  height: 4.5rem;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  border: transparent;
+  font-weight: 700;
+  background-color: var(--blue-color);
+  color: #fdfefe;
+  transition: 0.2s all ease-in;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 30rem;
+  height: 100%;
+}
+
+.about{
+  display: flex;
+  margin-top: 2rem;
+  position: relative;
+  width: 30rem;
+  justify-content: center;
+}
+
+
+.about p {
+  align-self: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 1rem;
+  display: inline-block;
+  z-index: 2;
+  background-color: var(--white-color);
+
+}
+
+.line{
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  width: 30rem;
+  border-top: 1.5px solid #ccd1d1;
+  z-index: 1;
+}
+
+
+.icon-links{
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.linkedin{
+  width: 3rem;
+}
+
+.github{
+  width: 3rem;
+}
+
+.white-space-2 {
+  max-height: 5rem;
+  height: 100%;
+  margin-top: 2rem;
+}
+
+footer {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--blue-color);
+  margin-bottom: 3rem;
+}
+
+span{
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--orange-color);
+}
+
+
+/* --------------RIGHT CONTAINER------------------------- */
+
+
+/* https://stackoverflow.com/questions/11757537/css-image-size-how-to-fill-but-not-stretch */
+.right-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 1px 1px 1px 0;
+}
+
+/* ---------RESPONSIVE---------------------------------------------------------------------- */
+
+@media (max-width: 690px){
+  .inner-container{
+    width: 60%;
+  }
+}
+
+@media (max-width: 590px) {
+  .inner-container {
+    width: 100%;
+
+  }
+}
+
+@media (max-width: 320px){
+  .central-container{
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 220px) {
+  .central-container{
+    width: 22rem;
+  }
+}
+
+@media (max-height: 580px){
+  footer {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-height: 550px){
+  footer {
+    display: none;
+  }
+}
+
+@media (max-height: 510px){
+  .central-container{
+    height: 510px;
+  }
+}

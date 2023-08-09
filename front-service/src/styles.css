@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue-color: #1c39df;
+  --dark-blue-color: #14289c;
+  --white-color: #fdfefe;
+  --gray-color: #ccd1d1;
+  --white-gray-color: #e0e3e3;
+  --orange-color: #ba4a00;
+}
+
+
+/* How to fonts */
+/* https://stackoverflow.com/questions/4872592/use-multiple-font-face-rules-in-css */
+@font-face {
+  font-family: NatoSans-Font;
+  src: url("./assets/fonts/NotoSans-Thin.ttf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: NatoSans-Font;
+  src: url("./assets/fonts/NotoSans-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: NatoSans-Font;
+  src: url("./assets/fonts/NotoSans-Medium.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: NatoSans-Font;
+  src: url("./assets/fonts/NotoSans-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: NatoSans-Font;
+  src: url("./assets/fonts/NotoSans-Black.ttf");
+  font-weight: 900;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+/* Very important for fixing overflow problem!!!!!!!!!!!! */
+/* https://stackoverflow.com/questions/23367345/100vw-causing-horizontal-overflow-but-only-if-more-than-one */
+body {
+  width: 100vw;
+  height: 100vh;
+  /*max-width: 100%;*/
+  /*max-height: 100%;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*justify-content: center;*/
+
+  background-color:  var(--white-gray-color);
+  font-family: NatoSans-Font, sans-serif;
+}
+
+router-outlet {
+  display: none;
+}
+
+/*app-root {*/
+/*  display: flex;*/
+/*  width: 100vw;*/
+/*  height: 100vh;*/
+/*  justify-items: center;*/
+/*  align-items: center;*/
+/*}*/
