@@ -70,7 +70,7 @@
   font-weight: 700;
   background-color: var(--blue-color);
   color: #fdfefe;
-  transition: 0.2s all ease-in;
+  transition: 0.1s all ease-out;
 }
 
 .bottom-container {

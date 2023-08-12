@@ -1,0 +1,94 @@
+.center-container {
+  background: #f9fafa;
+  height: 100%;
+  /*padding: 2rem 0 2rem 2rem;*/
+  display: flex;
+  flex-direction: column;
+}
+
+.app-name {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.6rem;
+  color: var(--orange-color);
+  padding: 2rem 0 2rem 2rem;
+}
+
+.car-icon {
+  color: var(--blue-color);
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  transition: 0.1s ease-in-out;
+}
+
+.btn-container:hover, .btn-container:focus{
+  background: #e8ebfc;
+  cursor: pointer;
+outline: none ;
+}
+
+/*https://programmersportal.com/how-to-draw-a-trapezoid-using-css/*/
+.border-left{
+  width: 0.6rem;
+  height: 3.5rem;
+  margin-right: 1.6rem;
+  clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
+}
+
+.part-icon-btn {
+  color:  #707b7c;
+}
+
+.btn-parts {
+  width: 100%;
+  font-size: 1.4rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.btn-container:hover .border-left,
+.btn-container:focus .border-left {
+  background: var(--blue-color) ;
+}
+
+.btn-container:hover .part-icon-btn,
+.btn-container:focus .part-icon-btn {
+  color: var(--blue-color) ;
+}
+
+.logout-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.btn-logout {
+  width: 15rem;
+  height: 3.5rem;
+  font-weight: 900;
+  background:  #d35400;
+  border: transparent;
+  border-radius: 0.5rem;
+  color: var(--white-color);
+  transition: 0.1s all ease-in;
+
+}
+
+.btn-logout:hover, .btn-logout:focus {
+  cursor: pointer;
+  background: #943b00;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+              rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+              rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+
+
+
