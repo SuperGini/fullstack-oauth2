@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {MatIconModule} from "@angular/material/icon";
+import redirect from "../../constants/redirect";
 
 @Component({
   selector: "login-component",
@@ -12,4 +13,7 @@ import {MatIconModule} from "@angular/material/icon";
 })
 export class LoginComponent {
 
+  redirect() {
+    window.location.href = redirect();
+  }
 }
