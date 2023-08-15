@@ -8,20 +8,27 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
 public class WebConfig {
 
+    private final CorsConfig corsConfig;
 
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-         http.csrf(AbstractHttpConfigurer::disable);
+        http.csrf(AbstractHttpConfigurer::disable);
+        corsConfig.corsCustomizer(http);
         return http
                 .authorizeHttpRequests(request ->
                         request
                                 .requestMatchers("/error").permitAll()
                                 .requestMatchers("/user").permitAll()
+                                .requestMatchers("css/**", "/fonts/**", "/images/**", "/svg/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(x ->
@@ -34,14 +41,14 @@ public class WebConfig {
      * https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/config/annotation/web/configuration/WebSecurityCustomizer.html
      * https://www.youtube.com/watch?v=3l2Z0_FGYls&t=42s
      * */
-    @Bean
-    public WebSecurityCustomizer ignoringCustomizer() {
-        return web -> web
-                .ignoring()
-                .requestMatchers("css/**",
-                                 "/fonts/**",
-                                 "/images/**",
-                                 "/svg/**"
-                );
-    }
+//    @Bean
+//    public WebSecurityCustomizer ignoringCustomizer() {
+//        return web -> web
+//                .ignoring()
+//                .requestMatchers("css/**",
+//                                 "/fonts/**",
+//                                 "/images/**",
+//                                 "/svg/**"
+//                );
+//    }
 }

@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -43,12 +44,16 @@ import java.util.UUID;
  */
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CorsConfig corsConfig;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+        corsConfig.corsCustomizer(http);
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
         http
@@ -78,7 +83,7 @@ public class SecurityConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) //nu este obligatoriu
-                .redirectUri("http://localhost:3000/authorized") //-> va face redirect la acest url la front client
+                .redirectUri("http://localhost:8083/authorized") //-> va face redirect la acest url la front client
                 .tokenSettings(
                         //putem sa setam proprietatile tokenului
                         TokenSettings.builder()

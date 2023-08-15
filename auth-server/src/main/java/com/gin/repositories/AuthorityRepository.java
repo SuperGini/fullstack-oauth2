@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface AuthorityRepository extends JpaRepository<Authorities, UUID> {
 
     @Query("""
-                SELECT  a FROM Authorities a WHERE a.role IN :roles
+                SELECT a FROM Authorities a WHERE a.role IN :roles
             """)
     Set<Authorities> getAuthorities(Set<String> roles);
 
