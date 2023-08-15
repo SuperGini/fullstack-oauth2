@@ -4,6 +4,7 @@ import com.gini.dto.request.PartRequest;
 import com.gini.dto.response.PartResponsePaginated;
 import com.gini.services.PartService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.security.Principal;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+@Slf4j
 @RestController
 @RequestMapping(
         consumes = APPLICATION_JSON_VALUE,
@@ -37,9 +39,7 @@ public class PartController {
 
     @GetMapping("/parts/{page}/{pageSize}")
     public PartResponsePaginated getPaginatedParts(@PathVariable int page, @PathVariable int pageSize, Principal principal){
-
-        var x = principal.getName();
-
+        log.info("User is: {}", principal.getName());
         return partService.getPartsWithPagination(page, pageSize);
     }
 

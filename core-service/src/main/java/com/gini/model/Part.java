@@ -20,8 +20,10 @@ public class Part {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-
     private String partName;
+
+    @Column(name = "quantity")
+    private int quantity;
 
     @Column(name = "price")
     private BigDecimal price;

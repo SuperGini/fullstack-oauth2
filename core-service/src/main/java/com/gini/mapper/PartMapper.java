@@ -19,6 +19,7 @@ public class PartMapper {
 
         return Part.builder()
                 .partName(partRequest.partName())
+                .quantity(partRequest.quantity())
                 .car(car)
                 .price(partRequest.price())
                 .build();
@@ -31,12 +32,13 @@ public class PartMapper {
                 part.getCar().getCarModel()
         );
 
-        return new PartResponse(
-                part.getId(),
-                part.getPartName(),
-                part.getPrice(),
-                car
-        );
+        return PartResponse.builder()
+                .id(part.getId())
+                .quantity(part.getQuantity())
+                .partName(part.getPartName())
+                .price(part.getPrice())
+                .car(car)
+                .build();
     }
 
 }

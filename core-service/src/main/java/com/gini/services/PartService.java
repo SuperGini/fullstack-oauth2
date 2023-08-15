@@ -1,6 +1,7 @@
 package com.gini.services;
 
 import com.gini.dto.request.PartRequest;
+import com.gini.dto.response.PartResponse;
 import com.gini.dto.response.PartResponsePaginated;
 import com.gini.mapper.PartMapper;
 import com.gini.model.Part;
@@ -33,12 +34,24 @@ public class PartService {
 
         var listOfParts = partPage.stream()
                 .map(PartMapper::mapForm)
+                .map(PartService::calculatePartTotal)
                 .toList();
+        long total = listOfParts.stream()
+                .mapToLong(PartResponse::getPartTotal)
+                .sum();
+
 
         return new PartResponsePaginated(
                 listOfParts,
-                totalNrOfParts
+                totalNrOfParts,
+                total
         );
 
+    }
+
+    private static PartResponse calculatePartTotal(PartResponse x) {
+        long partTotal = x.getPrice().longValue() * x.getQuantity();
+        x.setPartTotal(partTotal);
+        return x;
     }
 }
