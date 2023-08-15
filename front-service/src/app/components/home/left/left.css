@@ -12,6 +12,7 @@
   font-size: 1.6rem;
   color: var(--orange-color);
   padding: 2rem 0 2rem 2rem;
+  margin-bottom: 2rem;
 }
 
 .car-icon {
@@ -21,7 +22,6 @@
 .btn-container {
   display: flex;
   align-items: center;
-  margin-top: 2rem;
   transition: 0.1s ease-in-out;
 }
 
@@ -39,11 +39,11 @@ outline: none ;
   clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
 }
 
-.part-icon-btn {
+.btn-icon {
   color:  #707b7c;
 }
 
-.btn-parts {
+.btn {
   width: 100%;
   font-size: 1.4rem;
   height: 4.5rem;
@@ -57,8 +57,8 @@ outline: none ;
   background: var(--blue-color) ;
 }
 
-.btn-container:hover .part-icon-btn,
-.btn-container:focus .part-icon-btn {
+.btn-container:hover .btn-icon,
+.btn-container:focus .btn-icon {
   color: var(--blue-color) ;
 }
 

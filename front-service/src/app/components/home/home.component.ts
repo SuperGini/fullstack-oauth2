@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {LeftComponent} from "./left/left.component";
-import {RightComponent} from "./right/right.component";
+import {TableComponent} from "./right/table/table.component";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: "home-component",
@@ -8,7 +9,8 @@ import {RightComponent} from "./right/right.component";
   styleUrls: ["./home.css"],
   imports: [
     LeftComponent,
-    RightComponent
+    TableComponent,
+    RouterOutlet
   ],
   standalone: true
 })

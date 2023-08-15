@@ -5,8 +5,13 @@
     </div>
     <div class="btn-container" tabindex="1">
       <div class="border-left"></div>
-      <mat-icon svgIcon="parts" class="part-icon-btn"></mat-icon>
-      <div class="btn-parts" >
+      <mat-icon svgIcon="home" class="btn-icon"></mat-icon>
+      <div class="btn" (click)="redirectHome()">Home</div>
+    </div>
+    <div class="btn-container" tabindex="2">
+      <div class="border-left"></div>
+      <mat-icon svgIcon="parts" class="btn-icon"></mat-icon>
+      <div class="btn" (click)="addPart()" >
         <p>Add parts</p>
       </div>
     </div>

@@ -4,5 +4,6 @@ export enum SvgIcons {
   LINKEDIN = 'linkedin',
   CAR = 'car',
   SEARCH = 'search',
-  PARTS = 'parts'
+  PARTS = 'parts',
+  HOME = 'home'
 }

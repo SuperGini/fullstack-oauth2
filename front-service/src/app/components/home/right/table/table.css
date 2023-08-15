@@ -59,7 +59,7 @@
   margin-left: 2rem;
   outline: none;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-  rgb(209, 213, 219) 0px 0px 0px 1px inset;
+              rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
 .search-bar:focus {
@@ -111,7 +111,7 @@
 
 .table-head {
   display: grid;
-  grid-template-columns: 4fr 2fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
   padding-left: 2rem;
   background: #eceeee;
   height: 3rem;
@@ -124,7 +124,7 @@
 
 .table-row {
   display: grid;
-  grid-template-columns: 4fr 2fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
   height: 3.5rem;
   background: #edeffd;
   padding-left: 2rem;

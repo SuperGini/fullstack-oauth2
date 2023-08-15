@@ -1,0 +1,43 @@
+<div class="center-container">
+  <div class="user-container">
+    <p>username: ginitoru@gmail.com</p>
+  </div>
+  <form class="add-part-container" [formGroup]="createPartForm">
+    <div class="form-container">
+      <label>part name</label>
+      <div *ngIf="partName?.errors?.['invalidString']">
+        Must not contain numbers/special characters
+      </div>
+      <input type="text" class="form-input" formControlName="partName">
+    </div>
+    <div class="form-container">
+      <label>price</label>
+      <div *ngIf="price?.invalid && price?.dirty">
+         Must be a positive number
+      </div>
+      <input type="text" class="form-input" formControlName="price">
+    </div>
+    <div class="form-container">
+      <label>quantity</label>
+      <div *ngIf="quantity?.invalid && quantity?.dirty">
+        Must be a positive number
+      </div>
+      <input type="text" class="form-input" formControlName="quantity">
+    </div>
+    <div class="form-container">
+      <label>manufacturer</label>
+      <div *ngIf="manufacturer?.errors?.['invalidString']">
+         Must not contain numbers/special characters
+      </div>
+      <input type="text" class="form-input" formControlName="manufacturer">
+    </div>
+    <div class="form-container">
+      <label>car model</label>
+      <div *ngIf="carModel?.errors?.['invalidString']">
+         Must not contain numbers/special characters
+      </div>
+      <input type="text" class="form-input" formControlName="carModel">
+    </div>
+    <button type="submit" class="btn-add-part" (click)="addPart()">Add part</button>
+  </form>
+</div>

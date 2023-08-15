@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {GatewayService} from "../../services/gatewayService";
 
 @Component({
   selector: 'auth-component',
@@ -11,8 +10,7 @@ import {GatewayService} from "../../services/gatewayService";
 export class AuthComponent implements OnInit {
 
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private authService: AuthService) {
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService) {
     this.getAuthCodeFromUrl();
   }
 
@@ -28,7 +26,6 @@ export class AuthComponent implements OnInit {
       }
     })
   }
-
 
 
 }
