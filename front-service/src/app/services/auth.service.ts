@@ -24,7 +24,7 @@ export class AuthService {
 
     const options = {headers: headers};
 
-    return this.gatewayService.getAuthToken(tokenUrl(this.code), null, options)
+    return this.gatewayService.getAuthToken(tokenUrl(this.code), null)
       .subscribe(token => {
         sessionStorage.setItem('id_token', token.id_token);
         sessionStorage.setItem('refresh_token', token.refresh_token);

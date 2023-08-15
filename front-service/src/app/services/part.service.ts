@@ -10,35 +10,31 @@ export class PartService {
 
   private gateway = inject(GatewayService);
 
-
   getPartsWithPagination(pageIndex: number, pageSize: number): Observable<PartResponsePaginated>{
-    const url = `http://localhost:8081/parts/${pageIndex}/${pageSize}`;
+    const url: string = `http://localhost:8081/parts/${pageIndex}/${pageSize}`;
     console.log(pageIndex + ' ++ ' +pageSize);
-    const options = this.setHeaders();
+  //  const options = this.setHeaders();
 
-    return this.gateway.getParts(url, options);
+    return this.gateway.getParts(url);
 
 
   }
 
   createPart (partRequest: PartRequest){
-    const url = `http://localhost:8081/part`;
-    const options = this.setHeaders();
+    const url: string = `http://localhost:8081/part`;
     console.log(partRequest)
-    return  this.gateway.createPart(url, partRequest, options).subscribe();
-
-    ;
+    return  this.gateway.createPart(url, partRequest).subscribe();
 
   }
 
-
-  private setHeaders() {
-    const token = sessionStorage.getItem('id_token');
-    const bearerToken = `Bearer ${token}`;
-    const headers = new HttpHeaders()
-                                            .set('Authorization', bearerToken)
-                                            .set('content-type', 'application/json');
-    return {headers: headers};
-  }
+  // ->moved the headers in interceptors
+  // private setHeaders() {
+  //   const token = sessionStorage.getItem('id_token');
+  //   const bearerToken = `Bearer ${token}`;
+  //   const headers = new HttpHeaders()
+  //                                           .set('Authorization', bearerToken)
+  //                                          .set('content-type', 'application/json');
+  //   return {headers: headers};
+  // }
 
 }

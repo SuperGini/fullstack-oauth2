@@ -11,16 +11,16 @@ export class GatewayService {
   private httpClient = inject(HttpClient);
 
 
-  getAuthToken(url: string, body: any, options: {headers: HttpHeaders }): Observable<Token> {
-    return this.httpClient.post<Token>(url, body, options);
+  getAuthToken(url: string, body: any): Observable<Token> {
+    return this.httpClient.post<Token>(url, body);
   }
 
-  getParts(url: string, options: {headers: HttpHeaders}) {
-    return this.httpClient.get<PartResponsePaginated>(url, options);
+  getParts(url: string) {
+    return this.httpClient.get<PartResponsePaginated>(url);
   }
 
-  createPart(url: string, body: PartRequest, options: {headers: HttpHeaders}){
-    return this.httpClient.post(url, body, options);
+  createPart(url: string, body: PartRequest){
+    return this.httpClient.post(url, body);
   }
 
 }
