@@ -35,6 +35,7 @@ label {
 .form-input {
   height: 3.5rem;
   outline: none;
+  padding-left: 0.5rem;
   border-radius: 0.5rem;
   border: 1px solid var(--gray-color);
 }

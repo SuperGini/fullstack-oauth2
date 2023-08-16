@@ -2,17 +2,28 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/com
 import {Observable} from "rxjs";
 
 export class AuthInterceptor implements HttpInterceptor {
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const basicAuth = this.generateBasicAuthForClient();
 
-    const token = sessionStorage.getItem('id_token');
-    const bearerToken = `Bearer ${token}`;
+    const path = req.url.includes('oauth2/token');
 
-    const authRequest = req.clone({
-      headers: req.headers
-                      .append('Authorization', bearerToken)
-    });
+    if (path) {
+      const reqBasicHeader = req.clone({
+        headers: req.headers
+          .append('Authorization', basicAuth)
+      });
 
-    return next.handle(authRequest);
+      return next.handle(reqBasicHeader);
+    }
+
+    return next.handle(req);
   }
 
+  private generateBasicAuthForClient() {
+    const client = 'client';
+    const secret = 'secret';
+    return `Basic ` + btoa(`${client}:${secret}`);
+
+  }
 }

@@ -1,10 +1,12 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
-import {HomeComponent} from "./components/home/home.component";
 import {AuthComponent} from "./components/auth/auth.component";
-import {PartComponent} from "./components/home/right/part/part.component";
-import {TableComponent} from "./components/home/right/table/table.component";
 
+
+/*
+ * preloading strategy:
+ * https://dev.to/railsstudent/how-to-lazy-load-routes-and-import-standalone-components-in-angular-4b1a
+ * */
 
 export const routes: Routes = [
   {
@@ -14,22 +16,22 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    component: AuthComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    loadComponent: () => import('./components/auth/auth.component').then(mod=> mod.AuthComponent)
   },
   {
     path: 'home',
-    component: HomeComponent,
+    loadComponent: () => import('./components/home/home.component').then(mod => mod.HomeComponent),
     children: [
       {
         path: 'table',
-        component: TableComponent,
-        pathMatch: "full"
+        pathMatch: "full",
+        loadComponent: () => import('./components/home/right/table/table.component').then(mod => mod.TableComponent)
       },
       {
         path: 'part',
-        component: PartComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        loadComponent: () => import('./components/home/right/part/part.component').then(mod => mod.PartComponent)
       }
     ]
   },
