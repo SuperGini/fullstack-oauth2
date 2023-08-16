@@ -6,7 +6,7 @@ import {AuthComponent} from "./components/auth/auth.component";
 /*
  * preloading strategy:
  * https://dev.to/railsstudent/how-to-lazy-load-routes-and-import-standalone-components-in-angular-4b1a
- * */
+ */
 
 export const routes: Routes = [
   {
