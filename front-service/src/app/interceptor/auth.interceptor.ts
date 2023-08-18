@@ -7,13 +7,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const basicAuth = this.generateBasicAuthForClient();
-
     const path = req.url.includes('oauth2/token');
 
     if (path) {
       const reqBasicHeader = req.clone({
         headers: req.headers
-          .append('Authorization', basicAuth)
+                    .append('Authorization', basicAuth)
       });
 
       return next.handle(reqBasicHeader);

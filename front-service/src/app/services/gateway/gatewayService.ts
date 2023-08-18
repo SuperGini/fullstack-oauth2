@@ -20,7 +20,11 @@ export class GatewayService {
   }
 
   createPart(url: string, body: PartRequest){
-    return this.httpClient.post(url, body);
+    return this.httpClient.post(url ,body);
+  }
+
+  regenerateAuthToken(url: string, body: any): Observable<Token>{
+    return this.httpClient.post<Token>(url, body);
   }
 
 }

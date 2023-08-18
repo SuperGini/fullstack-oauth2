@@ -11,17 +11,12 @@ export class PartService {
   private gateway = inject(GatewayService);
 
   getPartsWithPagination(pageIndex: number, pageSize: number): Observable<PartResponsePaginated>{
-    const url: string = `http://localhost:8081/parts/${pageIndex}/${pageSize}`;
-    console.log(pageIndex + ' ++ ' +pageSize);
-  //  const options = this.setHeaders();
-
+    const url: string = `http://localhost:8082/parts/${pageIndex}/${pageSize}`;
     return this.gateway.getParts(url);
-
-
   }
 
   createPart (partRequest: PartRequest){
-    const url: string = `http://localhost:8081/part`;
+    const url: string = `http://localhost:8082/part`;
     console.log(partRequest)
     return  this.gateway.createPart(url, partRequest).subscribe();
 
