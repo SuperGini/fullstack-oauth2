@@ -14,11 +14,15 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -27,6 +31,8 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
@@ -37,6 +43,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.time.Duration;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -54,6 +63,11 @@ public class SecurityConfig {
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         corsConfig.corsCustomizer(http);
+        /**
+         *  http // necesara ca sa avem acces la http://localhost:8080/.well-known/openid-configuration din postman
+         *             .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+         *             .oidc(Customizer.withDefaults()); //OpenId connect
+         * */
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
         http
@@ -73,7 +87,6 @@ public class SecurityConfig {
     }
 
 
-    //FOR THE MOMENT
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient r1 = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -85,11 +98,12 @@ public class SecurityConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) //nu este obligatoriu
                 .redirectUri("http://localhost:8083/authorized") //-> va face redirect la acest url la front client
                 .tokenSettings(
-                        //putem sa setam proprietatile tokenului
+                       // putem sa setam proprietatile tokenului
                         TokenSettings.builder()
                                 .accessTokenTimeToLive(Duration.ofHours(10))
                                 .refreshTokenTimeToLive(Duration.ofHours(10))
                                 .build()
+
                 )
                 .clientSettings(ClientSettings.builder()
                         .requireAuthorizationConsent(true)
@@ -99,6 +113,9 @@ public class SecurityConfig {
         RegisteredClient r2 = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("apiClient")
                 .clientSecret("apiSecret")
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenTimeToLive(Duration.ofHours(10))
+                        .build())
                 .scope(OidcScopes.OPENID)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
@@ -127,15 +144,35 @@ public class SecurityConfig {
         return new ImmutableJWKSet<>(set);
     }
 
-    @Bean
+    @Bean //main settings of the server where we can override the endpoints
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder().build();
     }
 
 
-    @Bean
+    @Bean // use Bcrypt in practice
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
+    }
+
+            //https://stackoverflow.com/questions/74730577/add-claims-to-the-token-in-spring-security-after-retrieving-a-user
+            //https://docs.spring.io/spring-authorization-server/docs/current/reference/html/core-model-components.html#oauth2-token-customizer
+            //https://docs.spring.io/spring-authorization-server/docs/current/reference/html/guides/how-to-userinfo.html#customize-id-token
+            //https://github.com/spring-projects/spring-authorization-server/pull/1073/commits/eea7db3746323f0ffb10362ec254fa1d2cf36bfd#diff-7dda346b2952ea91e854d284361d20298d4dc323beeb0188ca00be3038910d9c
+    @Bean //customize the JWT so I can add claims to it
+    public OAuth2TokenCustomizer<JwtEncodingContext> oAuth2TokenCustomizer() {
+        return context -> {
+            var authorities = context.getPrincipal().getAuthorities();
+
+            context.getClaims()
+                    .claim("authorities", authorities.stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .toList()
+                    );
+//           if(OidcParameterNames.ID_TOKEN.equals(context.getTokenType().getValue())){
+//
+//            }
+        };
     }
 
 
