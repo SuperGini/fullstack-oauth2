@@ -30,10 +30,22 @@ public class SecurityConfig {
         corsConfig.corsCustomizer(http);
         http.csrf(AbstractHttpConfigurer::disable);
         http.oauth2Client(Customizer.withDefaults()); //client
-        http.authorizeHttpRequests(request -> request.anyRequest().permitAll());
+
+        http
+            .oauth2ResourceServer(
+                    auth -> auth.jwt(jwt -> jwt.jwkSetUri("http://localhost:8080/oauth2/jwks")
+                    )
+            );
+
+        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
+
+
         return http
                 .build();
     }
+
+
+
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
