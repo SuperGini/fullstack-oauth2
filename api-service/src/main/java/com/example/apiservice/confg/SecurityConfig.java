@@ -1,5 +1,6 @@
 package com.example.apiservice.confg;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -19,10 +20,14 @@ import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CorsConfig corsConfig;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        corsConfig.corsCustomizer(http);
         http.csrf(AbstractHttpConfigurer::disable);
         http.oauth2Client(Customizer.withDefaults()); //client
         http.authorizeHttpRequests(request -> request.anyRequest().permitAll());

@@ -4,7 +4,8 @@ import java.util.List;
 
 public record PartResponsePaginated(
         List<PartResponse> partResponses,
-        long nrOfParts
+        long nrOfParts,
+        long total
 
 ) {
 }

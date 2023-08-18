@@ -9,4 +9,4 @@ logging:
     org.hibernate.sql: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.springframework.security: TRACE
-    root: trace
+#    root: trace
