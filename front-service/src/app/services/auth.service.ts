@@ -4,7 +4,7 @@ import tokenUrl from "../constants/tokenUrl";
 import {HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {refreshTokenUrl} from "../constants/refreshTokenUrl";
-import {catchError, throwError} from "rxjs";
+import {catchError, map, throwError} from "rxjs";
 
 //https://stackoverflow.com/questions/48075688/how-to-decode-the-jwt-encoded-token-payload-on-client-side-in-angular
 //https://medium.com/@ryanchenkie_40935/angular-authentication-using-the-http-client-and-http-interceptors-2f9d1540eb8
@@ -53,5 +53,13 @@ export class AuthService {
     }
     return throwError(() => new Error(`Something bad happened; please try again later. + ${error.error} and status ${error.status}`));
   }
+
+    regenerateAuthToken2(){
+        return this.gatewayService.regenerateAuthToken(refreshTokenUrl(), null)
+            .pipe(
+                catchError(this.handleError.bind(this))
+            )
+
+    }
 
 }
