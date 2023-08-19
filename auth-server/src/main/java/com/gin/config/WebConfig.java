@@ -26,13 +26,15 @@ public class WebConfig {
         return http
                 .authorizeHttpRequests(request ->
                         request
+                                .requestMatchers("/home").hasAuthority("ADMIN")
                                 .requestMatchers("/error").permitAll()
                                 .requestMatchers("/user").permitAll()
                                 .requestMatchers("css/**", "/fonts/**", "/images/**", "/svg/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(x ->
-                        x.loginPage("/login").defaultSuccessUrl("/home").permitAll())
+                        x.loginPage("/login").permitAll()
+                                .defaultSuccessUrl("/home"))
                 .build();
     }
 
