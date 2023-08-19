@@ -60,9 +60,4 @@ export class TableComponent implements OnInit{
     this.pageIndex = e.pageIndex;
   }
 
-
-
-
-
-
 }
