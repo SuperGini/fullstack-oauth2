@@ -56,6 +56,9 @@ public class ClientConfig {
                 .build();
     }
 
+    /**
+     * since I have the spring-web on the classpath it will start tomcat and run in a synchronous way.
+     * */
     @Bean
     public HttpServiceProxyFactory httpServiceProxyFactory(WebClient client) {
         return HttpServiceProxyFactory
