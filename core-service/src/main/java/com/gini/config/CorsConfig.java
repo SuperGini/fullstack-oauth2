@@ -7,7 +7,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.List;
 
-@Component
+//no need for this since i don't call this service from front-end
+//@Component
 public class CorsConfig {
     public void corsCustomizer(HttpSecurity http) throws Exception {
         http.cors(c -> {
