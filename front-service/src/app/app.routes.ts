@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {AuthComponent} from "./components/auth/auth.component";
 import {canActivateRoute} from "./guards/auht.guard";
+import {NotFoundComponent} from "./components/notfound/not.found.component";
 
 
 /*
@@ -53,7 +54,13 @@ export const routes: Routes = [
     path: '*',
     redirectTo: 'auth',
     pathMatch: 'full'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+
   }
+
 
 
 ];
