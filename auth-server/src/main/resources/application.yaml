@@ -1,5 +1,11 @@
 server:
   port: 8080
+  servlet:
+    session:
+      cookie:
+        name: superGiniSession
+        max-age: 5m
+      timeout: 40s
 
 spring:
   application:
