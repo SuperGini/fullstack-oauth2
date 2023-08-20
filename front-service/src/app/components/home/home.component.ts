@@ -1,7 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, inject, OnInit} from "@angular/core";
 import {LeftComponent} from "./left/left.component";
 import {TableComponent} from "./right/table/table.component";
 import {RouterOutlet} from "@angular/router";
+import {LogoutService} from "../../services/logout.service";
 
 @Component({
   selector: "home-component",
@@ -14,6 +15,14 @@ import {RouterOutlet} from "@angular/router";
   ],
   standalone: true
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit{
+
+  private logout = inject(LogoutService);
+
+  ngOnInit(): void {
+    this.logout.logoutTimer();
+  }
+
+
 
 }

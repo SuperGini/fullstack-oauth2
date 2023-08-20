@@ -1,11 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import {LoginComponent} from "./components/login/login.component";
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {SvgIconsService} from "./services/svgIcons.service";
-import {resetParseTemplateAsSourceFileForTest} from "@angular/compiler-cli/src/ngtsc/typecheck/diagnostics";
-import {SvgIcons} from "./utility/svg.icons";
-import {HttpClientModule} from "@angular/common/http";
+import {LogoutService} from "./services/logout.service";
+import {filter} from "rxjs";
+import {State} from "./state/state";
 
 @Component({
   selector: 'app-root',
@@ -14,12 +13,31 @@ import {HttpClientModule} from "@angular/common/http";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
 
   private svgIconService = inject(SvgIconsService);
+  private logout = inject(LogoutService);
+  private router = inject(Router);
+  private state = inject(State);
+
 
   ngOnInit(): void {
-   this.svgIconService.addIconsToRegistry();
+    this.svgIconService.addIconsToRegistry();
+    this.detectRouterOutletUrlChange();
   }
 
+  private detectRouterOutletUrlChange() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
+        // A route navigation has occurred
+        console.log('Route change detected:');
+        // Perform your logic here
+        this.state.timeoutTime.next(Date.now());
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.logout.closeLogoutTimer();
+  }
 }

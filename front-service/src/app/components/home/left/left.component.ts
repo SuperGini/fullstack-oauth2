@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {NgIf} from "@angular/common";
 
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {AuthService} from "../../../services/auth.service";
+import {LogoutService} from "../../../services/logout.service";
 
 @Component({
   selector: 'left-component',
@@ -20,11 +22,12 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 export class LeftComponent implements OnInit{
 
   role: string | undefined;
-  private router = inject(Router);
+  private router: Router = inject(Router);
+  private authService: AuthService = inject(AuthService);
+  private logoutService = inject(LogoutService);
 
   ngOnInit(): void {
     this.setRoleFiled();
-
   }
 
   redirectHome() {
@@ -37,7 +40,7 @@ export class LeftComponent implements OnInit{
   }
 
   private setRoleFiled() {
-    const token = <string>sessionStorage.getItem("access_token");
+    const token = <string>sessionStorage.getItem("id_token");
 
     const jwtHelper: JwtHelperService = new JwtHelperService();
     const decodedToken = jwtHelper.decodeToken(token);
@@ -47,5 +50,7 @@ export class LeftComponent implements OnInit{
         .at(0);
   }
 
-
+  logout() {
+    this.logoutService.logout();
+  }
 }

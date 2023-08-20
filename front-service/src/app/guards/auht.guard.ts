@@ -8,7 +8,7 @@ import {map} from "rxjs";
 export const canActivateRoute: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
 
   const jwtHelper: JwtHelperService = new JwtHelperService();
-  const accessToken: string = <string>sessionStorage.getItem('access_token');
+  const accessToken: string = <string>sessionStorage.getItem('id_token');
   const isTokenExpired: boolean = jwtHelper.isTokenExpired(accessToken);
 
   console.log(`is token expired?: ${isTokenExpired}`)

@@ -5,6 +5,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {refreshTokenUrl} from "../constants/refreshTokenUrl";
 import {catchError, throwError} from "rxjs";
+import {CookieService} from "ngx-cookie-service";
 
 //https://stackoverflow.com/questions/48075688/how-to-decode-the-jwt-encoded-token-payload-on-client-side-in-angular
 //https://medium.com/@ryanchenkie_40935/angular-authentication-using-the-http-client-and-http-interceptors-2f9d1540eb8
@@ -16,6 +17,7 @@ export class AuthService {
 
   private gatewayService: GatewayService = inject(GatewayService);
   private router: Router = inject(Router);
+
 
   getAuthToken() {
     return this.gatewayService.getAuthToken(tokenUrl(this.code), null)
@@ -59,7 +61,5 @@ export class AuthService {
       .pipe(
         catchError(this.handleError.bind(this))
       )
-
   }
-
 }

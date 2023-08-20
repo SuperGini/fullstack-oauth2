@@ -10,11 +10,13 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token = sessionStorage?.getItem('access_token');
+    const token = sessionStorage?.getItem('id_token');
     const bearerToken: string = `Bearer ${token}`;
     const path: boolean = req.url.includes('oauth2/token');
+    const path2: boolean = req.url.includes('connect/logout');
 
-    if (!path) {
+
+    if (!path && !path2) {
       const authRequest = req.clone({
         headers: req.headers
           .append('Authorization', bearerToken)
@@ -26,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
           catchError(this.handleError.bind(this))
         );
     }
-
+    console.log("token interceptor calling core-service")
     return next.handle(req);
   }
 
