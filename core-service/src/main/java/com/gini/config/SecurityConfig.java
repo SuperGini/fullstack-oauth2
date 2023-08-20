@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -21,6 +22,8 @@ public class SecurityConfig {
                 auth -> auth.jwt(jwt -> jwt.jwkSetUri("http://localhost:8080/oauth2/jwks")
                 )
         );
+
+        http.sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http
            .authorizeHttpRequests(req -> req.anyRequest().authenticated());
