@@ -40,6 +40,27 @@ public class PartService {
                 .mapToLong(PartResponse::getPartTotal)
                 .sum();
 
+        return new PartResponsePaginated(
+                listOfParts,
+                totalNrOfParts,
+                total
+        );
+    }
+
+    @Transactional(readOnly = true)
+    public PartResponsePaginated getPartsByPartName(int page, int pageSize, String partName){
+        var pageRequest = PageRequest.of(page, pageSize);
+        var partPage = partRepository.getPartByPartName(pageRequest, partName);
+
+        var totalNrOfParts = partPage.getTotalElements();
+
+        var listOfParts = partPage.stream()
+                .map(PartMapper::mapForm)
+                .map(PartService::calculatePartTotal)
+                .toList();
+        long total = listOfParts.stream()
+                .mapToLong(PartResponse::getPartTotal)
+                .sum();
 
         return new PartResponsePaginated(
                 listOfParts,

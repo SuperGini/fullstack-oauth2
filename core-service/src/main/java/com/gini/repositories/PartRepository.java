@@ -20,5 +20,11 @@ public interface PartRepository extends JpaRepository<Part, UUID> {
     Page<Part> getPartsWithPagination(Pageable page);
 
 
+    @Query("""
+    SELECT p FROM Part p JOIN FETCH p.car WHERE p.partName LIKE %:partName% ORDER BY p.partName ASC
+    """)
+    Page<Part> getPartByPartName(Pageable page, String partName);
+
+
 
 }
