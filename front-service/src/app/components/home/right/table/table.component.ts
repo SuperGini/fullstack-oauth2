@@ -6,6 +6,7 @@ import {PartResponsePaginated} from "../../../../utility/response/partResponsePa
 import {NgForOf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {isValidStringValidator} from "../../../../validators/validators";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Component({
   selector: 'right-component',
@@ -30,8 +31,9 @@ export class TableComponent implements OnInit{
   showFirstLastButtons = true;
   disabled = false;
 
-   pageEvent: any;
+  pageEvent: any;
 
+  username: string ="";
   searchForPart: FormGroup;
 
   constructor(private partService: PartService) {
@@ -45,6 +47,18 @@ export class TableComponent implements OnInit{
 
 
   ngOnInit(): void {
+    const jwtHelper: JwtHelperService = new JwtHelperService();
+    const token = <string>sessionStorage.getItem("id_token")
+
+    const y = jwtHelper.decodeToken(token);
+    this.username = y.sub;
+
+    if(!this.pageEvent){
+      this.pageEvent = new PageEvent();
+      this.pageEvent.pageIndex = 0;
+      this.pageEvent.pageSize = 5;
+    }
+
     this.partService.getPartsWithPagination(0,5)
       .subscribe( part => {
         this.length = part.nrOfParts;
@@ -83,12 +97,6 @@ export class TableComponent implements OnInit{
 
   search() {
     const partName: string = this.searchForPart.value.partName;
-
-    if(!this.pageEvent){
-      this.pageEvent = new PageEvent();
-      this.pageEvent.pageIndex = 0;
-      this.pageEvent.pageSize = 5;
-    }
 
     if(partName){
       this.partService.getPartsWithPaginationByPartName(this.pageEvent.pageIndex, this.pageEvent.pageSize, partName)
