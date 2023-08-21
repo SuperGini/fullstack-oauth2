@@ -16,4 +16,10 @@ public interface CoreServiceClient {
     PartResponsePaginated getPaginatedParts(@PathVariable int page,
                                             @PathVariable int pageSize);
 
+
+    @GetExchange("/parts/{page}/{pageSize}/{partName}")
+    PartResponsePaginated getPaginatedPartsByPartName(@PathVariable int page,
+                                                      @PathVariable int pageSize,
+                                                      @PathVariable String partName);
+
 }

@@ -44,4 +44,11 @@ public class PartController {
         return gateWayService.getPaginatedParts(page, pageSize);
     }
 
+    @GetMapping("/parts/{page}/{pageSize}/{partName}")
+    public PartResponsePaginated getPaginatedPartsByPartName(@PathVariable int page,
+                                                             @PathVariable int pageSize,
+                                                             @PathVariable String partName){
+        return gateWayService.getPaginatedPartsByPartName(page, pageSize, partName);
+    }
+
 }

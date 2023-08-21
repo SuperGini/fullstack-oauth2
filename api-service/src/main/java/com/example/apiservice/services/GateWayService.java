@@ -20,5 +20,9 @@ public class GateWayService {
         return coreServiceClient.getPaginatedParts(page, pageSize);
     }
 
+    public PartResponsePaginated getPaginatedPartsByPartName(int page, int pageSize, String partName){
+        return coreServiceClient.getPaginatedPartsByPartName(page, pageSize, partName);
+    }
+
 
 }
