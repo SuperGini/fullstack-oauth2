@@ -27,6 +27,7 @@ export class GatewayService {
     return this.httpClient.post<Token>(url, body);
   }
 
+  //not used
   logout(url: string, body: any){
     return this.httpClient.post(url, body);
   }

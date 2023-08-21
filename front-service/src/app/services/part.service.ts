@@ -15,6 +15,11 @@ export class PartService {
     return this.gateway.getParts(url);
   }
 
+  getPartsWithPaginationByPartName(pageIndex: number, pageSize: number, partName: string): Observable<PartResponsePaginated>{
+    const url: string = `http://localhost:8082/parts/${pageIndex}/${pageSize}/${partName}`;
+    return this.gateway.getParts(url);
+  }
+
   createPart (partRequest: PartRequest){
     const url: string = `http://localhost:8082/part`;
     console.log(partRequest)

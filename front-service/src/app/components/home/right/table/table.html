@@ -5,10 +5,10 @@
     <div class="search-container">
       <mat-icon svgIcon="search" class="search-icon"></mat-icon>
       <div class="line"></div>
-      <div class="xxx">
-        <input type="text" class="search-bar">
+      <div class="xxx" [formGroup]="searchForPart">
+        <input type="text" class="search-bar" formControlName="partName">
       </div>
-      <div class="yyy">
+      <div class="yyy" (click)="search()">
         <button type="submit" class="btn-search">Search</button>
       </div>
   </div>

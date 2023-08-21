@@ -19,7 +19,7 @@ export class LogoutService {
       const timeNow = Date.now();
 
       const logoutTime = (timeNow - lastUserAction) / 60000;
-      console.log(15 - logoutTime + ` time until logout`)
+      console.log(15 - logoutTime + ` minutes until logout`)
 
       if(logoutTime > 15){
       this.logout();
