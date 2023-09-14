@@ -48,6 +48,7 @@ public class UserService implements UserDetailsService {
     public void createUser(UserRequest2 userRequest2){
         var auth = authorityRepository.getAuthorities(userRequest2.getAuthorities());
         var user = UserConvertor.convertFrom(userRequest2, auth);
+        //you need to add authorities in database because I forgot to create a mapped by for the @ManyToMany relationship:D
         userRepository.persist(user);
     }
 
