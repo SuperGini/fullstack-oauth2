@@ -1,4 +1,4 @@
-# Full Stack with OAuth
+# Full Stack with OAuth2
 
 ### About the project:
 
